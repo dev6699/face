@@ -1,0 +1,17 @@
+services:
+  tritonserver:
+    container_name: tritonserver
+    image: nvcr.io/nvidia/tritonserver:24.05-py3
+    command: tritonserver --model-repository=/models
+    ports:
+      - 8000:8000
+      - 8001:8001
+      - 8002:8002
+    volumes:
+      - ${LOCAL_WORKSPACE_FOLDER}/model_repository:/models
+    privileged: true
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - capabilities: [gpu]
