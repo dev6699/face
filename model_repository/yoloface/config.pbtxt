@@ -1,0 +1,2 @@
+name: "yoloface"
+platform: "onnxruntime_onnx"

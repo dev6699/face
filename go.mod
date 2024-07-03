@@ -3,6 +3,7 @@ module github.com/dev6699/face
 go 1.22.4
 
 require (
+	gocv.io/x/gocv v0.37.0
 	google.golang.org/grpc v1.64.0
 	google.golang.org/protobuf v1.34.2
 )
