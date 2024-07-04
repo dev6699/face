@@ -1,37 +1,36 @@
-## Yoloface with face landmark5 detection
+## Gender age detection
 
 <img src="output.jpg">
 
 ---
 Model description 
-[Get model](https://github.com/facefusion/facefusion-assets/releases/download/models/yoloface_8n.onnx)
+[Get model](https://github.com/facefusion/facefusion-assets/releases/download/models/gender_age.onnx)
 ```
 {
-  "name": "yoloface",
+  "name": "gender_age",
   "versions": [
     "1"
   ],
   "platform": "onnxruntime_onnx",
   "inputs": [
     {
-      "name": "images",
+      "name": "data",
       "datatype": "FP32",
       "shape": [
-        1,
+        -1,
         3,
-        640,
-        640
+        96,
+        96
       ]
     }
   ],
   "outputs": [
     {
-      "name": "output0",
+      "name": "fc1",
       "datatype": "FP32",
       "shape": [
         1,
-        20,
-        8400
+        3
       ]
     }
   ]
