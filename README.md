@@ -57,6 +57,18 @@ This repository contains a suite of face AI models designed for various applicat
 
     <img src="docs/2dfan4.jpg" height=200>
 
+### ArcFace for Feature Embedding
+- Model Name: [arcface](model/arcface/arcface.go)
+- Description: Generates feature embeddings for faces, useful for identity verification and facial recognition tasks.
+- Download Link: [Download ArcFace Model](https://github.com/facefusion/facefusion-assets/releases/download/models/arcface_w600k_r50.onnx)
+
+    *Cosine distance of arcface embedding*
+    | Source\Target | <img src="docs/arcface_1.jpg" height=80 align=right> | <img src="docs/arcface_2.jpg" height=80 align=right> | <img src="docs/arcface_3.jpg" height=80 align=right> |
+    | :-----: | :-: | :---: | :-----: | 
+    | <img src="docs/arcface_1.jpg" height=80 align=right> | 0.00 | 0.29 | 0.48 |
+    | <img src="docs/arcface_2.jpg" height=80 align=right> | 0.29 | 0.00 | 0.45 |
+    | <img src="docs/arcface_3.jpg" height=80 align=right> | 0.48 | 0.45 | 0.00 |
+
 ### Gender and Age Estimation
 - Model Name: [gender_age](model/genderage/genderage.go)
 - Description: Detects gender and estimates the age of detected faces.
