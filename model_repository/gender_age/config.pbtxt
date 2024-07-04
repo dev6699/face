@@ -1,0 +1,2 @@
+name: "gender_age"
+platform: "onnxruntime_onnx"
