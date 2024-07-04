@@ -64,3 +64,27 @@ func WarpFaceByTranslation(visionFrame gocv.Mat, translation Translation, scale 
 
 	return cropVisionFrame, affineMatrix
 }
+
+func InvertAffineMatrix(affineMatrix gocv.Mat) gocv.Mat {
+	invertAffineMatrix := gocv.NewMatWithSize(2, 3, gocv.MatTypeCV64F)
+	gocv.InvertAffineTransform(affineMatrix, &invertAffineMatrix)
+	return invertAffineMatrix
+}
+
+// CalculateMean2f calculates the mean of a slice of gocv.Point2f
+func CalculateMean2f(points []gocv.Point2f) gocv.Point2f {
+	if len(points) == 0 {
+		return gocv.Point2f{}
+	}
+
+	var sumX, sumY float32
+	for _, point := range points {
+		sumX += point.X
+		sumY += point.Y
+	}
+
+	meanX := sumX / float32(len(points))
+	meanY := sumY / float32(len(points))
+
+	return gocv.Point2f{X: meanX, Y: meanY}
+}

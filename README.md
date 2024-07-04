@@ -50,15 +50,22 @@ This repository contains a suite of face AI models designed for various applicat
     ```
 
 ## Available Models
+### 2DFAN4 for Landmark 68 Detection
+- Model Name: [2dfan4](model/2dfan4/2dfan4.go)
+- Description: Detects 68 facial landmarks for detailed facial analysis and alignment.
+- Download Link: [Download 2DFAN4 Model](https://github.com/facefusion/facefusion-assets/releases/download/models/2dfan4.onnx)
+
+    <img src="docs/2dfan4.jpg" height=200>
+
 ### Gender and Age Estimation
-- Model Name: gender_age
+- Model Name: [gender_age](model/genderage/genderage.go)
 - Description: Detects gender and estimates the age of detected faces.
 - Download Link: [Download Gender and Age Estimation Model](https://github.com/facefusion/facefusion-assets/releases/download/models/yoloface_8n.onnx)
 
     <img src="docs/gender_age.jpg" height=200>
 
 ### YOLOFace
-- Model Name: yoloface
+- Model Name: [yoloface](model/yoloface/yoloface.go)
 - Description: Detects face bounding boxes and the 5 key facial landmarks (landmark5) using the YOLO architecture.
 - Download Link: [Download YOLOFace Model](https://github.com/facefusion/facefusion-assets/releases/download/models/yoloface_8n.onnx)
 
