@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"encoding/binary"
 	"image"
+	"image/color"
 	"io"
 	"math"
 
@@ -87,4 +88,78 @@ func CalculateMean2f(points []gocv.Point2f) gocv.Point2f {
 	meanY := sumY / float32(len(points))
 
 	return gocv.Point2f{X: meanX, Y: meanY}
+}
+
+// Size represents the width and height dimensions.
+type Size struct {
+	Width, Height int
+}
+
+func WarpFaceByFaceLandmark5(visionFrame gocv.Mat, faceLandmark5 []gocv.Point2f, warpTemplate []gocv.Point2f, cropSize Size) (gocv.Mat, gocv.Mat) {
+	affineMatrix := estimateMatrixByFaceLandmark5(faceLandmark5, warpTemplate, cropSize)
+	cropVisionFrame := gocv.NewMat()
+
+	gocv.WarpAffineWithParams(
+		visionFrame,
+		&cropVisionFrame,
+		affineMatrix,
+		image.Pt(cropSize.Width, cropSize.Height),
+		gocv.InterpolationArea,
+		gocv.BorderReplicate,
+		color.RGBA{},
+	)
+
+	return cropVisionFrame, affineMatrix
+}
+
+func estimateMatrixByFaceLandmark5(faceLandmark5 []gocv.Point2f, warpTemplate []gocv.Point2f, cropSize Size) gocv.Mat {
+	normedWarpTemplate := normalizeWarpTemplate(warpTemplate, cropSize)
+	pvsrc := gocv.NewPoint2fVectorFromPoints(faceLandmark5)
+	pvdst := gocv.NewPoint2fVectorFromPoints(normedWarpTemplate)
+	inliers := gocv.NewMat()
+	defer inliers.Close()
+	method := 8
+	ransacProjThreshold := 100.0
+	maxiters := uint(2000)
+	confidence := 0.99
+	refineIters := uint(10)
+	// https://docs.opencv.org/4.x/d9/d0c/group__calib3d.html#gad767faff73e9cbd8b9d92b955b50062d
+	affineMatrix := gocv.EstimateAffinePartial2DWithParams(pvsrc, pvdst, inliers, method, ransacProjThreshold, maxiters, confidence, refineIters)
+	return affineMatrix
+}
+
+// normalizeWarpTemplate scales the warp template according to the crop size.
+func normalizeWarpTemplate(warpTemplate []gocv.Point2f, cropSize Size) []gocv.Point2f {
+	normedWarpTemplate := make([]gocv.Point2f, len(warpTemplate))
+	for i, pt := range warpTemplate {
+		normedWarpTemplate[i] = gocv.Point2f{
+			X: pt.X * float32(cropSize.Width),
+			Y: pt.Y * float32(cropSize.Height),
+		}
+	}
+	return normedWarpTemplate
+}
+
+// MatSubtract subtract value v fom mat
+func MatSubtract(mat gocv.Mat, v float64) {
+	constantValue := float64(v)
+	constantMat := gocv.NewMatWithSizeFromScalar(gocv.NewScalar(constantValue, constantValue, constantValue, 0), mat.Rows(), mat.Cols(), mat.Type())
+	defer constantMat.Close()
+	gocv.Subtract(mat, constantMat, &mat)
+}
+
+// ClipMat clips the values of a gocv.Mat within a specified range.
+// mat need to be float32 type
+func ClipMat(mat gocv.Mat, minVal, maxVal float32) {
+	for row := 0; row < mat.Rows(); row++ {
+		for col := 0; col < mat.Cols(); col++ {
+			value := mat.GetFloatAt(row, col)
+			if value < minVal {
+				value = minVal
+			} else if value > maxVal {
+				value = maxVal
+			}
+			mat.SetFloatAt(row, col, value)
+		}
+	}
 }

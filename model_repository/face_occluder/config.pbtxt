@@ -1,0 +1,2 @@
+name: "face_occluder"
+platform: "onnxruntime_onnx"

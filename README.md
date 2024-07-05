@@ -58,7 +58,7 @@ This repository contains a suite of face AI models designed for various applicat
     <img src="docs/2dfan4.jpg" height=200>
 
 ### ArcFace for Feature Embedding
-- Model Name: [arcface](model/arcface/arcface.go)
+- Model Name: [arcface_w600k_r50](model/arcface/arcface.go)
 - Description: Generates feature embeddings for faces, useful for identity verification and facial recognition tasks.
 - Download Link: [Download ArcFace Model](https://github.com/facefusion/facefusion-assets/releases/download/models/arcface_w600k_r50.onnx)
 
@@ -68,6 +68,14 @@ This repository contains a suite of face AI models designed for various applicat
     | <img src="docs/arcface_1.jpg" height=80 align=right> | 0.00 | 0.29 | 0.48 |
     | <img src="docs/arcface_2.jpg" height=80 align=right> | 0.29 | 0.00 | 0.45 |
     | <img src="docs/arcface_3.jpg" height=80 align=right> | 0.48 | 0.45 | 0.00 |
+
+### Face Occluder Detection
+- Model Name: [face_occluder](model/faceoccluder/faceoccluder.go)
+- Description: Detects parts of a face that are not occluded by objects, providing insights into visible facial features.
+- Download Link: [Download Face Occluder Model](https://github.com/facefusion/facefusion-assets/releases/download/models/face_occluder.onnx)
+
+    <img src="docs/face_occluder_1.jpg" height=200>
+    <img src="docs/face_occluder_2.jpg" height=200>
 
 ### Gender and Age Estimation
 - Model Name: [gender_age](model/genderage/genderage.go)
