@@ -1,0 +1,2 @@
+name: "inswapper_128_fp16"
+platform: "onnxruntime_onnx"

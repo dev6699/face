@@ -84,6 +84,15 @@ This repository contains a suite of face AI models designed for various applicat
 
     <img src="docs/gender_age.jpg" height=200>
 
+### Inswapper
+- Model Name: [inswapper_128_fp16](model/inswapper/inswapper.go)
+- Description: Swaps the target face with a source face, enabling realistic face replacement in images.
+- Download Link: [Download Inswapper Model](https://github.com/facefusion/facefusion-assets/releases/download/models/inswapper_128_fp16.onnx)
+
+    | Source | Target | Output |
+    | :----: | :----: | :----: | 
+    | <img src="docs/inswapper_1.jpg" height=200> | <img src="docs/inswapper_2.jpg" height=200> | <img src="docs/inswapper_3.jpg" height=200> |
+
 ### YOLOFace
 - Model Name: [yoloface](model/yoloface/yoloface.go)
 - Description: Detects face bounding boxes and the 5 key facial landmarks (landmark5) using the YOLO architecture.
