@@ -1,0 +1,2 @@
+name: "gfpgan_1.4"
+platform: "onnxruntime_onnx"

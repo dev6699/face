@@ -69,6 +69,16 @@ This repository contains a suite of face AI models designed for various applicat
     | <img src="docs/arcface_2.jpg" height=80 align=right> | 0.29 | 0.00 | 0.45 |
     | <img src="docs/arcface_3.jpg" height=80 align=right> | 0.48 | 0.45 | 0.00 |
 
+### Face Enhancer with GFPGAN
+- Model Name: [gfpgan_1.4](model/gfpgan/gfpgan.go)
+- Description: Enhances facial features and improves image quality, often used for face restoration and super-resolution tasks.
+- Download Link: [Download GFPGAN Model](https://github.com/facefusion/facefusion-assets/releases/download/models/gfpgan_1.4.onnx)
+
+    | Input | Output |
+    | :---: | :----: |
+    | <img src="docs/gfpgan_1.jpg" height=200> | <img src="docs/gfpgan_2.jpg" height=200> |
+    
+
 ### Face Occluder Detection
 - Model Name: [face_occluder](model/faceoccluder/faceoccluder.go)
 - Description: Detects parts of a face that are not occluded by objects, providing insights into visible facial features.

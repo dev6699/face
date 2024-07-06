@@ -43,7 +43,7 @@ func (m *Model) PostProcess(rawOutputContents [][]byte) (*Output, error) {
 	model.ClipMat(maskMat, 0.5, 1)
 	model.MatSubtract(maskMat, 0.5)
 	maskMat.MultiplyFloat(2)
-	cropMask := reduceMinimum([]gocv.Mat{m.boxMask, maskMat})
+	cropMask := model.ReduceMinimum([]gocv.Mat{m.boxMask, maskMat})
 	model.ClipMat(cropMask, 0, 1)
 
 	defer m.boxMask.Close()
@@ -54,32 +54,4 @@ func (m *Model) PostProcess(rawOutputContents [][]byte) (*Output, error) {
 		AffineMatrix:    m.affineMatrix,
 		CropMask:        cropMask,
 	}, nil
-}
-
-// reduceMinimum finds the element-wise minimum of a list of gocv.Mat
-func reduceMinimum(mats []gocv.Mat) gocv.Mat {
-	if len(mats) == 0 {
-		return gocv.NewMat()
-	}
-
-	// Start with the first matrix as the initial minimum
-	minMat := mats[0].Clone()
-	rows, cols := minMat.Rows(), minMat.Cols()
-
-	// Iterate over the remaining matrices
-	for i := 1; i < len(mats); i++ {
-		for row := 0; row < rows; row++ {
-			for col := 0; col < cols; col++ {
-				currentMin := minMat.GetFloatAt(row, col)
-				newValue := mats[i].GetFloatAt(row, col)
-
-				// Update the minimum value
-				if newValue < currentMin {
-					minMat.SetFloatAt(row, col, newValue)
-				}
-			}
-		}
-	}
-
-	return minMat
 }
