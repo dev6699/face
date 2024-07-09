@@ -1,4 +1,9 @@
 # face
+
+[![GoDoc](https://pkg.go.dev/badge/github.com/dev6699/face)](https://pkg.go.dev/github.com/dev6699/face)
+[![Go Report Card](https://goreportcard.com/badge/github.com/dev6699/face)](https://goreportcard.com/report/github.com/dev6699/face)
+[![License](https://img.shields.io/github/license/dev6699/face)](LICENSE)
+
 A comprehensive collection of face AI models with integrated pre and post-processing steps, utilizing NVIDIA Triton Inference Server for seamless inference. This repository aims to provide easy-to-use face detection, recognition, and analysis tools.
 
 ## Table of Contents
@@ -21,28 +26,34 @@ This repository contains a suite of face AI models designed for various applicat
 - <b>Easy-to-Use Interface:</b>  Simple API for quick integration into various applications.
 
 ## Installation
-1. Clone the Repository:
+- ### Use `go get` to install this package:
+
+    ```bash
+    go get github.com/dev6699/face
+    ```
+
+- ### Clone the Repository:
 
     ```bash
     git clone https://github.com/dev6699/face.git
     cd face
     ```
 
-2. Open the repository in vscode devcontainer.
+### Download and Prepare Models:
+- Navigate to the [Available Models](#available-models) section to find the download links for each model.
+- Download each model and rename the file to `model.onnx`.
+- Place each `model.onnx` file into its respective directory within the model_repository folder.
+- Example: Setting up the YOLOFace model:
 
-3. Download and Prepare Models:
-    - Navigate to the [Available Models](#available-models) section to find the download links for each model.
-    - Download each model and rename the file to `model.onnx`.
-    - Place each `model.onnx` file into its respective directory within the model_repository folder.
-    - Example: Setting up the YOLOFace model:
-
-        ```bash
-        mkdir -p model_repository/yoloface/1
-        wget -O model_repository/yoloface/1/model.onnx <model_url>
-        ```
-        Ensure to replace <model_url> with the actual URL provided in the [Available Models](#available-models) section.
+    ```bash
+    mkdir -p model_repository/yoloface/1
+    wget -O model_repository/yoloface/1/model.onnx <model_url>
+    ```
+    Ensure to replace <model_url> with the actual URL provided in the [Available Models](#available-models) section.
 
 ## Usage
+Please refer to the [examples](examples) folder for more information on how to use the models and run various tasks.
+
 1. Start Triton Inference Server:
 
     ```bash

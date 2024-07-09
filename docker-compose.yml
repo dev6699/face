@@ -15,3 +15,7 @@ services:
         reservations:
           devices:
             - capabilities: [gpu]
+            
+networks:
+  default:
+    name: face_devcontainer_default

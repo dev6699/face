@@ -287,3 +287,25 @@ func getInverseVisionFrame(cropVisionFrame gocv.Mat, inverseMatrix gocv.Mat, tem
 	inverseVisionFrame.ConvertTo(&inverseVisionFrame, gocv.MatTypeCV64F)
 	return inverseVisionFrame
 }
+
+// CalcFaceDistance to calculate the distance between two face embeddings
+func CalcFaceDistance(faceEmbedding, referenceFaceEmbedding []float32) float64 {
+	if len(faceEmbedding) == 0 || len(referenceFaceEmbedding) == 0 || len(faceEmbedding) != len(referenceFaceEmbedding) {
+		return 0
+	}
+
+	dotProduct := dotProduct(faceEmbedding, referenceFaceEmbedding)
+	return 1.0 - float64(dotProduct)
+}
+
+func dotProduct(v1, v2 []float32) float32 {
+	if len(v1) != len(v2) {
+		return 0
+	}
+
+	var result float32
+	for i := 0; i < len(v1); i++ {
+		result += v1[i] * v2[i]
+	}
+	return result
+}
